@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        // VFL stuff... no safeAreaLayoutGuide
 //        view.addSubview(label1)
 //        view.addSubview(label2)
 //        view.addSubview(label3)
@@ -37,8 +39,10 @@ class ViewController: UIViewController {
         
         for label in [label1, label2, label3, label4, label5] {
             view.addSubview(label)
-            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            label.heightAnchor.constraint(equalToConstant: 88).isActive = true
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            // when you use both a multiplier and a constant, the multiplier gets factored in first then the constant
+            label.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/5, constant: -10).isActive = true
             
             if let previous = previous {
                 // we have a previous label – create a height constraint
